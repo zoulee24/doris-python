@@ -363,33 +363,3 @@ class DorisDialect_base(MySQLDialect):
         )
         row = rs.fetchone()
         return {"text": row[0] if row else None}
-
-
-# ---------------------------------------------------------------------------
-# Driver-specific Doris dialects.  Each one combines the Doris-specific
-# reflection / DDL logic from ``DorisDialect_base`` with the driver plumbing
-# from the matching ``sqlalchemy.dialects.mysql`` class.
-# ---------------------------------------------------------------------------
-
-from sqlalchemy.dialects.mysql.mysqldb import MySQLDialect_mysqldb  # noqa: E402
-from sqlalchemy.dialects.mysql.pymysql import MySQLDialect_pymysql  # noqa: E402
-
-
-class DorisDialect_mysqldb(DorisDialect_base, MySQLDialect_mysqldb):
-    """Doris dialect using the ``mysqlclient`` / ``MySQLdb`` driver."""
-
-    driver = "mysqldb"
-    supports_statement_cache = True
-
-
-class DorisDialect_pymysql(DorisDialect_base, MySQLDialect_pymysql):
-    """Doris dialect using the pure-Python ``pymysql`` driver."""
-
-    driver = "pymysql"
-    supports_statement_cache = True
-
-
-# Backwards-compatibility alias — the original ``DorisDialect`` was registered
-# against the mysqldb driver.  Re-export it so existing ``doris://`` URLs
-# (which default to the mysqldb driver) keep working.
-DorisDialect = DorisDialect_mysqldb
