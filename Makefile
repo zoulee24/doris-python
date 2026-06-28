@@ -1,7 +1,7 @@
 .PHONY: format lint
 
 format:
-	ruff format src/
+	ruff format .
 
 lint:
 	ruff check src/

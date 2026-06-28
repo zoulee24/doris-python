@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "doris-python"
 dynamic = ["version"]
-description = "Apache Doris SQLAlchemy dialect (supplementary packaging for pydoris)"
+description = "Apache Doris SQLAlchemy dialect"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
@@ -38,7 +38,7 @@ Repository          = "https://github.com/zoulee24/doris-python"
 Issues              = "https://github.com/zoulee24/doris-python/issues"
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-asyncio", "ruff"]
+dev = ["pytest", "pytest-asyncio", "python-dotenv", "aiomysql", "pymysql", "ruff"]
 scripts = ["typer>=0.12"]
 
 [[tool.uv.index]]
@@ -46,14 +46,14 @@ url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
 default = true
 
 # Register Doris dialects with SQLAlchemy so they are discoverable
-# without users having to ``import pydoris`` first.
+# without users having to ``import doris_python`` first.
 # See: https://docs.sqlalchemy.org/en/20/dialects/#registering-new-dialects
 [project.entry-points."sqlalchemy.dialects"]
-"doris"          = "pydoris.sqlalchemy.dialect:DorisDialect_mysqldb"
-"doris.mysqldb"  = "pydoris.sqlalchemy.dialect:DorisDialect_mysqldb"
-"doris.pymysql"  = "pydoris.sqlalchemy.pymysql:DorisDialect_pymysql"
-"doris.aiomysql" = "pydoris.sqlalchemy.aiomysql:DorisDialect_aiomysql"
-"doris.asyncmy"  = "pydoris.sqlalchemy.asyncmy:DorisDialect_asyncmy"
+"doris"          = "doris_python.sqlalchemy.dialect:DorisDialect_mysqldb"
+"doris.mysqldb"  = "doris_python.sqlalchemy.dialect:DorisDialect_mysqldb"
+"doris.pymysql"  = "doris_python.sqlalchemy.pymysql:DorisDialect_pymysql"
+"doris.aiomysql" = "doris_python.sqlalchemy.aiomysql:DorisDialect_aiomysql"
+"doris.asyncmy"  = "doris_python.sqlalchemy.asyncmy:DorisDialect_asyncmy"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
