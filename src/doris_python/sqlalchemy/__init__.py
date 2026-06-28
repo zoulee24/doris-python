@@ -32,12 +32,12 @@ from sqlalchemy.dialects import registry
 
 # Default sync dialect — kept for backwards compatibility with the original
 # ``doris://`` URL form, which used the mysqlclient driver.
-registry.register("doris", "pydoris.sqlalchemy.dialect", "DorisDialect_mysqldb")
+registry.register("doris", "doris_python.sqlalchemy.dialect", "DorisDialect_mysqldb")
 
 # Sync drivers
-registry.register("doris.mysqldb", "pydoris.sqlalchemy.dialect", "DorisDialect_mysqldb")
-registry.register("doris.pymysql", "pydoris.sqlalchemy.pymysql", "DorisDialect_pymysql")
+registry.register("doris.mysqldb", "doris_python.sqlalchemy.dialect", "DorisDialect_mysqldb")
+registry.register("doris.pymysql", "doris_python.sqlalchemy.pymysql", "DorisDialect_pymysql")
 
 # Async drivers
-registry.register("doris.aiomysql", "pydoris.sqlalchemy.aiomysql", "DorisDialect_aiomysql")
-registry.register("doris.asyncmy", "pydoris.sqlalchemy.asyncmy", "DorisDialect_asyncmy")
+registry.register("doris.aiomysql", "doris_python.sqlalchemy.aiomysql", "DorisDialect_aiomysql")
+registry.register("doris.asyncmy", "doris_python.sqlalchemy.asyncmy", "DorisDialect_asyncmy")
