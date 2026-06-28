@@ -55,11 +55,11 @@ jobs:
         env:
           PREPARE_RELEASE_BUMP: ${{ inputs.bump }}
           PREPARE_RELEASE_DATE: ${{ inputs.date }}
-        run: uv run --no-sync python scripts/prepare_release.py prepare
+        run: uv run --extra scripts python scripts/prepare_release.py prepare
       - name: Get release version
         id: release-version
         run: |
-          version="$(uv run --no-sync python scripts/prepare_release.py current-version)"
+          version="$(uv run --extra scripts python scripts/prepare_release.py current-version)"
           echo "$version"
           echo "version=$version" >> "$GITHUB_OUTPUT"
       - name: Create release pull request

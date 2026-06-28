@@ -43,8 +43,8 @@ jobs:
         id: release-details
         run: |
           set -euo pipefail
-          version="$(uv run --no-sync python scripts/prepare_release.py current-version)"
-          uv run --no-sync python scripts/prepare_release.py release-notes > draft-release-notes.md
+          version="$(uv run --extra scripts python scripts/prepare_release.py current-version)"
+          uv run --extra scripts python scripts/prepare_release.py release-notes > draft-release-notes.md
           echo "version=$version" >> "$GITHUB_OUTPUT"
       - name: Create draft release
         env:
