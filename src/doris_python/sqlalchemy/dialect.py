@@ -27,7 +27,7 @@ asyncmy). Driver-specific subclasses live in their own modules.
 import logging
 from typing import Any, Dict, List
 
-from pydoris.sqlalchemy import datatype
+from doris_python.sqlalchemy import datatype
 from sqlalchemy import exc, log
 from sqlalchemy import schema as sa_schema
 from sqlalchemy import sql, text

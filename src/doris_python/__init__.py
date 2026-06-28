@@ -22,4 +22,4 @@ __version__ = "1.0.0"
 # Importing this module must register the entry points for the
 # ``doris`` dialect to be discoverable by ``create_engine`` /
 # ``create_async_engine``.
-from pydoris import sqlalchemy  # noqa: E402, F401
+from . import sqlalchemy  # noqa: E402, F401

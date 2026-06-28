@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "Apache Doris SQLAlchemy dialect (supplementary packaging for pydoris)"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "Apache-2.0" }
+license = { file = "LICENSE" }
 keywords = ["doris", "sqlalchemy", "dialect", "database", "pydoris"]
 authors = [
     { name = "GuanYu Zou" },
