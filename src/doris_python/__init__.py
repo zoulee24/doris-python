@@ -16,12 +16,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-try:
-    # 由 setuptools-scm 在打包时根据 git tag 自动生成
-    from ._version import version as __version__  # noqa: F401
-except ImportError:
-    # 本地开发或未安装包时回退到静态版本
-    __version__ = "0.0.0+local"
+__version__ = "1.0.0"
 
 # Register SQLAlchemy dialects (``doris://``, ``doris+aiomysql://`` etc.).
 # Importing this module must register the entry points for the
