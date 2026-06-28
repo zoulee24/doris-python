@@ -110,7 +110,9 @@ class DorisDDLCompiler(MySQLDDLCompiler):
         return ""
 
     def post_create_table(self, table):
-        opts = table.dialect_options.get("pydoris", {})
+        opts = table.dialect_options.get("doris", {})
+        if not opts:
+            opts = table.dialect_options.get("pydoris", {})
         parts = []
 
         # ENGINE
@@ -171,7 +173,7 @@ class DorisDialect_base(MySQLDialect):
     multiple-inheritance.
     """
 
-    name = "pydoris"
+    name = "doris"
     supports_statement_cache = True
 
     type_compiler = DorisTypeCompiler
