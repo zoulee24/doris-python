@@ -1,7 +1,7 @@
 # doris-python
 
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
-[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.x-orange)](https://www.sqlalchemy.org/)
+[![SQLAlchemy 2.x](https://img.shields.io/badge/SQLAlchemy-2.x-orange)](https://docs.sqlalchemy.org/en/20/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 
 > **Supplementary packaging for [`pydoris`](https://github.com/apache/doris/tree/master/samples/doris-python/pydoris).**
@@ -15,8 +15,8 @@
 
 | 角色 | 仓库 | 作用 |
 | --- | --- | --- |
-| 核心方言实现 | [`apache/doris` 仓库下的 `samples/doris-python/pydoris`](https://github.com/apache/doris/tree/master/samples/doris-python/pydoris) | 提供 Doris 方言源码（由 Apache Doris 官方维护） |
-| **本仓库** `doris-python` | 当前仓库 | 在 `pydoris` 基础上补齐 PyPI 打包配置（`pyproject.toml`）、入口点声明、测试与文档，让其可直接 `pip install` |
+| 核心方言实现 | [`apache/doris` 仓库下的 `pydoris`](https://pypi.org/project/pydoris/) | 提供 Doris 方言源码（由 Apache Doris 官方维护） |
+| **本仓库** `doris-python` | 当前仓库 | 在 `pydoris` 基础上补齐sqlalchemy常用驱动的支持 |
 
 > 本仓库通过 `pip install doris-python` 安装 `pydoris` 包，并自动注册 SQLAlchemy 方言入口点。
 > 使用方**无需**关心 `pydoris` 内部细节，只需使用标准的 SQLAlchemy URL 即可连接 Apache Doris。
@@ -129,16 +129,16 @@ class UserEvent(Base):
 ```
 ┌──────────────────────────────────────────────┐
 │           Apache Doris 官方仓库               │
-│  samples/doris-python/pydoris/                │
-│  ┌────────────────────────────────────────┐   │
-│  │  pydoris/                              │   │
-│  │   ├─ sqlalchemy/                       │   │
-│  │   │   ├─ dialect.py     ← 方言核心      │   │
-│  │   │   ├─ datatype.py    ← Doris 类型   │   │
-│  │   │   ├─ pymysql.py                    │   │
-│  │   │   ├─ aiomysql.py                   │   │
-│  │   │   └─ asyncmy.py                    │   │
-│  └────────────────────────────────────────┘   │
+│  samples/doris-python/pydoris/               │
+│  ┌────────────────────────────────────────┐  │
+│  │  pydoris/                              │  │
+│  │   ├─ sqlalchemy/                       │  │
+│  │   │   ├─ dialect.py     ← 方言核心      │  │
+│  │   │   ├─ datatype.py    ← Doris 类型   │  │
+│  │   │   ├─ pymysql.py                    │  │
+│  │   │   ├─ aiomysql.py                   │  │
+│  │   │   └─ asyncmy.py                    │  │
+│  └────────────────────────────────────────┘  │
 └──────────────────────────────────────────────┘
                      ▲
                      │ 源码同步
@@ -146,9 +146,9 @@ class UserEvent(Base):
 ┌──────────────────────────────────────────────┐
 │         本仓库：doris-python                  │
 │  - 同步 pydoris 源码                          │
-│  - 添加 pyproject.toml（PEP 621 标准）         │
+│  - 添加 pyproject.toml（PEP 621 标准）        │
 │  - 注册 SQLAlchemy entry-points              │
-│  - 维护 README 与单元测试                      │
+│  - 维护 README 与单元测试                     │
 │  - 发布至 PyPI（pip install doris-python）    │
 └──────────────────────────────────────────────┘
 ```
@@ -162,11 +162,11 @@ class UserEvent(Base):
 
 ```bash
 # 克隆仓库
-git clone https://github.com/<your-org>/doris-python.git
+git clone https://github.com/zoulee24/doris-python.git
 cd doris-python
 
 # 使用 uv（推荐）
-uv sync
+uv sync --extra dev
 
 # 或使用 pip
 pip install -e ".[dev]"
@@ -183,7 +183,6 @@ ruff format .
 
 ## 路线图
 
-- [ ] 与上游 `pydoris` 建立自动化同步机制
 - [ ] 补充方言反射（reflection）相关单元测试
 - [ ] GitHub Actions CI：lint + pytest + 多 Python 版本矩阵
 - [ ] 发布至 PyPI
@@ -192,7 +191,7 @@ ruff format .
 
 ## 许可证
 
-本项目遵循 **Apache License 2.0**，与上游 `pydoris` 及 Apache Doris 保持一致。
+本项目遵循 [**Apache License 2.0**](http://www.apache.org/licenses/LICENSE-2.0)，与上游 `pydoris` 及 Apache Doris 保持一致。
 
 ## 致谢
 
