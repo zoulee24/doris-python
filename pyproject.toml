@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64", "wheel", "setuptools-scm>=8"]
+requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -39,6 +39,7 @@ Issues              = "https://github.com/zoulee24/doris-python/issues"
 
 [project.optional-dependencies]
 dev = ["pytest", "pytest-asyncio", "ruff"]
+scripts = ["typer>=0.12"]
 
 [[tool.uv.index]]
 url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"

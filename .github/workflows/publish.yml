@@ -1,46 +1,42 @@
-name: Publish to PyPI
+name: Publish
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types:
+      - published
   workflow_dispatch:
+
+permissions: {}
 
 jobs:
   publish:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
+    environment: pypi
     permissions:
       id-token: write  # Required for PyPI trusted publishing (OIDC)
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version-file: ".python-version"
 
-      - name: Install build dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install build
-
-      - name: Build distributions
-        run: python -m build
-
-      - name: Publish to PyPI
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Install uv
+        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
         with:
-          packages-dir: dist/
-          # Use PyPI trusted publishing (configure the
-          # "publish-python" environment on PyPI and link this repo)
+          # Before upgrading uv version, make sure astral-sh/setup-uv knows its checksum.
+          # See: https://github.com/astral-sh/setup-uv/issues/851#issuecomment-4282017837
+          version: "0.11.18"
+          enable-cache: "false"
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist/
-          if-no-files-found: error
-          retention-days: 7
+      - name: Build distribution
+        run: uv build
+
+      - name: Publish
+        run: uv publish
