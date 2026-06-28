@@ -38,7 +38,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DORIS_PYTHON_LATEST_CHANGES_TOKEN }}
           persist-credentials: true
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -64,7 +64,7 @@ jobs:
           echo "version=$version" >> "$GITHUB_OUTPUT"
       - name: Create release pull request
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.DORIS_PYTHON_LATEST_CHANGES_TOKEN }}
           VERSION: ${{ steps.release-version.outputs.version }}
         run: |
           set -euo pipefail
