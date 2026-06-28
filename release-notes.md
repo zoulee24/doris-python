@@ -2,6 +2,8 @@
 
 ## Latest Changes
 
+## 1.0.2 (2026-06-28)
+
 ### Fixes
 
 * fix: 更新工作流权限配置以允许提交最新更改. PR [#10](https://github.com/zoulee24/doris-python/pull/10) by [@zoulee24](https://github.com/zoulee24).
