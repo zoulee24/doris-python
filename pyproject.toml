@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=49", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doris-python"
+version = "1.0.0"
+description = "Apache Doris SQLAlchemy dialect (supplementary packaging for pydoris)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+keywords = ["doris", "sqlalchemy", "dialect", "database", "pydoris"]
+authors = [
+    { name = "GuanYu Zou" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "sqlalchemy[asyncio]>=2,<3",
+]
+
+[project.urls]
+Homepage            = "https://github.com/zoulee24/doris-python"
+Repository          = "https://github.com/zoulee24/doris-python"
+Issues              = "https://github.com/zoulee24/doris-python/issues"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio", "ruff"]
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+default = true
+
+# Register Doris dialects with SQLAlchemy so they are discoverable
+# without users having to ``import pydoris`` first.
+# See: https://docs.sqlalchemy.org/en/20/dialects/#registering-new-dialects
+[project.entry-points."sqlalchemy.dialects"]
+"doris"          = "pydoris.sqlalchemy.dialect:DorisDialect_mysqldb"
+"doris.mysqldb"  = "pydoris.sqlalchemy.dialect:DorisDialect_mysqldb"
+"doris.pymysql"  = "pydoris.sqlalchemy.pymysql:DorisDialect_pymysql"
+"doris.aiomysql" = "pydoris.sqlalchemy.aiomysql:DorisDialect_aiomysql"
+"doris.asyncmy"  = "pydoris.sqlalchemy.asyncmy:DorisDialect_asyncmy"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+ignore = ["E501", "B028", "UP007"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
